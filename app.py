@@ -71,7 +71,10 @@ class Server:
             if event.type == VkBotEventType.MESSAGE_NEW:
                 print(self.users, event.type, event.object.text, sep='     ')
                 peer = event.object.peer_id
-                self.send_msg(peer, )
+                if event.object.text == 'Аукцион' and self.users[peer] == 0:
+                    self.users[peer] = 1
+
+                self.send_msg(peer, keyboard_index=self.users[peer])
 
 
 if __name__ == '__main__':
