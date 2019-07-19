@@ -1,0 +1,13 @@
+{
+  "one_time": false,
+  "buttons": [
+    [{
+      "action": {
+        "type": "text",
+        "label": "Аукцион"
+      },
+      "color": "positive"
+     }]
+   ]
+ }
+
