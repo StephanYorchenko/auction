@@ -10,7 +10,7 @@ import auction as au
 
 class Server:
     keyboards = {0: ['keyboards/home.json', 'Вы находитесь в главном меню!'],
-                 1: ['keyboards/type.json', 'Выберите задание:'],
+                 1: ['keyboards/task.json', 'Выберите задание:'],
                  2: ['keyboards/start.json', 'Нажмите, чтобы начать'],
                  }
     users = au.HelpfulDict()
