@@ -91,6 +91,9 @@ class HelpfulDict:
         # self.update(peer_id)
         return self.array[peer_id]
 
+    def __setitem__(self, key, value):
+        self.array[key] = value
+
     def __str__(self):
         return f'<------ {len(self.array.keys())} records---->'
 
