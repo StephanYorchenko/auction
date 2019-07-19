@@ -28,7 +28,7 @@ class Server:
 
         """Распределение типов сообщений по методам"""
 
-        if self.users[send_id][0] in {4, 5}:
+        if self.users[send_id] in {4, 5}:
             self.game_messages(send_id, message, start)
         else:
             self.standard_message(send_id, keyboard_index, message)
