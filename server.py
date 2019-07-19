@@ -65,6 +65,14 @@ class Server:
                                   random_id=self.random_id,
                                   keyboard=open(self.keyboards[keyboard_index][0], "r", encoding="UTF-8").read())
 
+    def start(self):
+        print('@home')
+        for event in self.long_poll.listen():
+            if event.type == VkBotEventType.MESSAGE_NEW:
+                print(self.users, event.type, event.object.text, sep='     ')
+                peer = event.object.peer_id
+                self.send_msg(peer, )
+
 
 if __name__ == '__main__':
     server1 = Server(token, group_id)
