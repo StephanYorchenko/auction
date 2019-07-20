@@ -61,7 +61,6 @@ class Server:
     def standard_message(self, send_id, keyboard_index=3, message=0):
 
         """Отправка стандартых сообщений (меню и прочее)"""
-        print('@')
         self.vk_api.messages.send(peer_id=send_id,
                                   message=self.keyboards[keyboard_index][1] if not message else message,
                                   keyboard=open(self.keyboards[keyboard_index][0], "r", encoding="UTF-8").read(),
@@ -92,9 +91,10 @@ class Server:
         for x in self.rooms.array.keys():
             if x.get_number_players() < 3:
                 x.array[x.array.get_len()] = au.User(self.get_user_name(peer), peer)
-                return [self.standard_message(t.id,
-                                              message=f'{self.get_user_name(peer)} присоединился к игре') for t in
-                        x.array.values()]
+                for t in x.values():
+                    self.standard_message(t.id,
+                                          message=f'{self.get_user_name(peer)} присоединился к игре')
+                return 0
 
         self.rooms[self.rooms.array.get_len()] = au.Room(au.PlayerChain(au.User(self.get_user_name(peer), peer)),
                                                          id=self.rooms.array.get_len())
