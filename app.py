@@ -72,6 +72,7 @@ class Server:
                 print(self.users, event.type, event.object.text, sep='     ')
                 print(self.rooms)
                 peer = event.object.peer_id
+                print(self.users[peer])
                 if self.users[peer] not in {2, 3, 4}:
                     if event.object.text == 'Аукцион' and self.users[peer] == 0:
                         self.users[peer] = 1
