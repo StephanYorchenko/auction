@@ -54,7 +54,7 @@ class Server:
         """Отправка стартового сообщения при запуске теста"""
 
         self.vk_api.messages.send(peer_id=send_id,
-                                  message='рад Вас видеть',
+                                  message='Нажмите начать',
                                   random_id=self.random_id,
                                   keyboard=open(self.keyboards[5][0], "r", encoding="UTF-8").read())
 
