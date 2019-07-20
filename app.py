@@ -81,7 +81,7 @@ class Server:
                         continue
                     elif event.object.text == 'Назад' and self.users[peer][0] == 1:
                         self.users[peer][0] = 0
-                    self.send_msg(peer, keyboard_index=self.users[peer])
+                    self.send_msg(peer, keyboard_index=self.users[peer][0])
                 elif self.users[peer][0] == 5:
                     print('&&')
                     self.create_room(peer)
