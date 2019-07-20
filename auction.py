@@ -88,7 +88,25 @@ class PlayerChain:
         self.array.append(User(name, id))
 
 
-class HelpfulDict:
+class UserDict:
+
+    def __init__(self):
+        self.array = {}
+
+    def __getitem__(self, peer_id):
+        if peer_id not in self.array.keys():
+            self.array[peer_id] = [0, 0]
+        # self.update(peer_id)
+        return self.array[peer_id]
+
+    def __setitem__(self, key, value):
+        self.array[key] = value
+
+    def __str__(self):
+        return f'<------ {len(self.array.keys())} records---->'
+
+
+class RoomDict:
 
     def __init__(self):
         self.array = {}
@@ -104,7 +122,6 @@ class HelpfulDict:
 
     def __str__(self):
         return f'<------ {len(self.array.keys())} records---->'
-
 
 if __name__ == '__main__':
     pc = PlayerChain([User('name1', '12345'),
