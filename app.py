@@ -12,7 +12,7 @@ class Server:
     keyboards = {0: ['keyboards/home.json', 'Вы находитесь в главном меню!'],
                  1: ['keyboards/task.json', 'Выберите задание:'],
                  2: ['keyboards/start.json', 'Нажмите, чтобы начать'],
-                 3: ['keyboards/none.json', '']
+                 3: ['keyboards/none.json', ''],
                  5: ['keyboards/keyboard_start.json', 'Нажмите, чтобы начать'],
                  }
     users = au.HelpfulDict()
