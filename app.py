@@ -78,7 +78,7 @@ class Server:
                         self.users[peer] = 1
                     elif event.object.text == 'Открытый пошаговый аукцион' and self.users[peer] == 1:
                         self.users[peer] = 5
-                        # self.send_msg(peer, start=True)
+                        self.send_msg(peer, start=True)
                         continue
                     elif event.object.text == 'Назад' and self.users[peer] == 1:
                         self.users[peer] = 0
@@ -98,7 +98,7 @@ class Server:
                                           message=f'{self.get_user_name(peer)} присоединился к игре')
                 return 0
 
-        self.rooms[len(self.rooms.array.keys())] = au.Room(au.PlayerChain(au.User(self.get_user_name(peer), peer)),
+        self.rooms[len(self.rooms.array.keys())] = au.Room(au.PlayerChain([au.User(self.get_user_name(peer), peer)]),
                                                            id=len(self.rooms.array.keys()))
 
     def get_user_name(self, user_id):
