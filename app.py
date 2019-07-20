@@ -67,15 +67,14 @@ class Server:
                                   random_id=self.random_id)
 
     def start(self):
-        print('@home')
         for event in self.long_poll.listen():
             if event.type == VkBotEventType.MESSAGE_NEW:
                 print(self.users, event.type, event.object.text, sep='     ')
+                print(self.rooms)
                 peer = event.object.peer_id
                 if self.users[peer] not in {3, 4}:
                     if event.object.text == 'Аукцион' and self.users[peer] == 0:
                         self.users[peer] = 1
-                        print('@@')
                     elif event.object.text == 'Открыть пошаговый аукцион' and self.users[peer] == 1:
                         self.users[peer] = 3
                         self.send_msg(peer, start=True)
