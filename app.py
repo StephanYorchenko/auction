@@ -73,6 +73,7 @@ class Server:
                 if self.users[peer] not in {3, 4}:
                     if event.object.text == 'Аукцион' and self.users[peer] == 0:
                         self.users[peer] = 1
+                        print('@@')
                     elif event.object.text == 'Открыть пошаговый аукцион' and self.users[peer] == 1:
                         self.users[peer] = 3
                         self.send_msg(peer, start=True)
@@ -80,20 +81,18 @@ class Server:
                 elif self.users[peer] == 3:
                     self.create_room(peer)
 
-
-
                 self.send_msg(peer, keyboard_index=self.users[peer])
 
     def create_room(self, peer):
         for x in self.rooms.array.keys():
-            if x.get_number_players()<3:
-                x.array[x.array.get_len()]=au.User(self.get_user_name(peer),peer)
+            if x.get_number_players() < 3:
+                x.array[x.array.get_len()] = au.User(self.get_user_name(peer), peer)
                 return [self.standard_message(t.id,
-                                      message=f'{self.get_user_name(peer)} присоединился к игре') for t in x.array.values()]
+                                              message=f'{self.get_user_name(peer)} присоединился к игре') for t in
+                        x.array.values()]
 
-
-        self.rooms[self.rooms.array.get_len()] = au.Room(au.PlayerChain(au.User(self.get_user_name(peer),peer)),
-                                                         id = self.rooms.array.get_len())
+        self.rooms[self.rooms.array.get_len()] = au.Room(au.PlayerChain(au.User(self.get_user_name(peer), peer)),
+                                                         id=self.rooms.array.get_len())
 
     def get_user_name(self, user_id):
 
