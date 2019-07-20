@@ -77,12 +77,13 @@ class Server:
                         self.users[peer] = 1
                     elif event.object.text == 'Открыть пошаговый аукцион' and self.users[peer] == 1:
                         self.users[peer] = 2
-                        self.send_msg(peer, start=True)
+                        #self.send_msg(peer, start=True)
                         continue
                     elif event.object.text == 'Назад' and self.users[peer] == 1:
                         self.users[peer] = 0
                     self.send_msg(peer, keyboard_index=self.users[peer])
                 elif self.users[peer] == 2:
+                    print('&&')
                     self.create_room(peer)
 
     def create_room(self, peer):
