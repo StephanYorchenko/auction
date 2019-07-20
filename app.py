@@ -85,6 +85,10 @@ class Server:
                 elif self.users[peer] == 5:
                     print('&&')
                     self.create_room(peer)
+                elif self.users[peer] == 4:
+                    self.send_msg(peer,
+                                  message='Ожидание игроков',
+                                  keyboard_index=3)
 
     def create_room(self, peer):
         print('creating')
@@ -96,7 +100,9 @@ class Server:
                 for t in self.rooms.array[x].users_array:
                     print('---')
                     self.standard_message(t.id,
-                                          message=f'{self.get_user_name(peer)} присоединился к игре')
+                                          message=f'{self.get_user_name(peer)} присоединился к игре',
+                                          keyboard_index=3)
+                    self.users[peer] = 4
                 return 0
 
         self.rooms[len(self.rooms.array.keys())] = au.Room(au.PlayerChain([au.User(self.get_user_name(peer), peer)]),
