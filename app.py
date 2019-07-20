@@ -109,6 +109,7 @@ class Server:
                                           message=f'{self.get_user_name(peer)} присоединился к игре',
                                           keyboard_index=3)
                     self.users[peer][1] = x
+                    self.users[peer][0] = 4
                 return 0
 
         self.rooms[len(self.rooms.array.keys())] = au.Room(au.PlayerChain([au.User(self.get_user_name(peer), peer)]),
