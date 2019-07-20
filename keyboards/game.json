@@ -1,0 +1,19 @@
+{
+  "one_time": false,
+  "buttons": [
+    [{
+      "action": {
+        "type": "text",
+        "label": "Поставить"
+      },
+      "color": "positive"
+     }],
+    [{
+      "action": {
+        "type": "text",
+        "label": "Пас"
+      },
+      "color": "negative"
+     }]
+   ]
+ }

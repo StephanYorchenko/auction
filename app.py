@@ -13,6 +13,7 @@ class Server:
                  1: ['keyboards/task.json', 'Выберите задание:'],
                  2: ['keyboards/start.json', 'Нажмите, чтобы начать'],
                  3: ['keyboards/none.json', '']
+                 5: ['keyboards/keyboard_start.json', 'Нажмите, чтобы начать'],
                  }
     users = au.HelpfulDict()
     rooms = au.HelpfulDict()
