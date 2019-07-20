@@ -14,8 +14,8 @@ class Server:
                  5: ['keyboards/keyboard_start.json', 'Нажмите, чтобы начать'],
                  3: ['keyboards/none.json', ''],
                  }
-    users = au.HelpfulDict()
-    rooms = au.HelpfulDict()
+    users = au.UserDict()
+    rooms = au.RoomDict()
 
     back_button = {1: 0}
 
@@ -29,7 +29,7 @@ class Server:
 
         """Распределение типов сообщений по методам"""
 
-        if self.users[send_id] in {3, 4}:
+        if self.users[send_id][0] in {3, 4}:
             self.game_messages(send_id, message, start)
         else:
             self.standard_message(send_id, keyboard_index, message)
@@ -71,24 +71,28 @@ class Server:
                 print(self.users, event.type, event.object.text, sep='     ')
                 print(self.rooms)
                 peer = event.object.peer_id
-                print(self.users[peer])
-                if self.users[peer] not in {2, 3, 4, 5}:
-                    if event.object.text == 'Аукцион' and self.users[peer] == 0:
-                        self.users[peer] = 1
-                    elif event.object.text == 'Открытый пошаговый аукцион' and self.users[peer] == 1:
-                        self.users[peer] = 5
+                print(self.users[peer][0])
+                if self.users[peer][0] not in {2, 3, 4, 5}:
+                    if event.object.text == 'Аукцион' and self.users[peer][0] == 0:
+                        self.users[peer][0] = 1
+                    elif event.object.text == 'Открытый пошаговый аукцион' and self.users[peer][0] == 1:
+                        self.users[peer][0] = 5
                         self.send_msg(peer, start=True)
                         continue
-                    elif event.object.text == 'Назад' and self.users[peer] == 1:
-                        self.users[peer] = 0
+                    elif event.object.text == 'Назад' and self.users[peer][0] == 1:
+                        self.users[peer][0] = 0
                     self.send_msg(peer, keyboard_index=self.users[peer])
-                elif self.users[peer] == 5:
+                elif self.users[peer][0] == 5:
                     print('&&')
                     self.create_room(peer)
-                elif self.users[peer] == 4:
+                elif self.users[peer][0] == 4:
                     self.send_msg(peer,
                                   message='Ожидание игроков',
                                   keyboard_index=3)
+                    if self.rooms.array[self.users[peer][1]].get_number_players() == 3:
+                        for t in self.users:
+                            if t[1] == self.users[peer][1]:
+                                t[0] = 5
 
     def create_room(self, peer):
         print('creating')
@@ -102,7 +106,7 @@ class Server:
                     self.standard_message(t.id,
                                           message=f'{self.get_user_name(peer)} присоединился к игре',
                                           keyboard_index=3)
-                    self.users[peer] = 4
+                    self.users[peer][1] = x
                 return 0
 
         self.rooms[len(self.rooms.array.keys())] = au.Room(au.PlayerChain([au.User(self.get_user_name(peer), peer)]),
