@@ -76,7 +76,7 @@ class Server:
                 if self.users[peer] not in {2, 3, 4}:
                     if event.object.text == 'Аукцион' and self.users[peer] == 0:
                         self.users[peer] = 1
-                    elif event.object.text == 'Открыть пошаговый аукцион' and self.users[peer] == 1:
+                    elif event.object.text == 'Открытый пошаговый аукцион' and self.users[peer] == 1:
                         self.users[peer] = 2
                         #self.send_msg(peer, start=True)
                         continue
