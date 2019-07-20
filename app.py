@@ -91,7 +91,8 @@ class Server:
         for x in self.rooms.array.keys():
             print('   @@@')
             if self.rooms.array[x].get_number_players() < 3:
-                self.rooms.array[x].user_array[self.rooms.array[x].array.get_len()] = au.User(self.get_user_name(peer),
+                print(self.rooms)
+                self.rooms.array[x].users_array[self.rooms.array[x].get_number_players()] = au.User(self.get_user_name(peer),
                                                                                               peer)
                 for t in self.rooms.array[x].values():
                     print('---')

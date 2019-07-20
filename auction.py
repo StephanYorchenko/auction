@@ -6,6 +6,7 @@ class Room:
         :param auc_step: minimal value of bet
         :param min_cost: starting cost of lot
         """
+        self.id = id
         self.users_array = array_users
         self.auc_step = auc_step
         self.current_cost = min_cost
