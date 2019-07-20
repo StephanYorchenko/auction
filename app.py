@@ -86,13 +86,15 @@ class Server:
                     print('&&')
                     self.create_room(peer)
                 elif self.users[peer][0] == 4:
-                    self.send_msg(peer,
-                                  message='Ожидание игроков',
-                                  keyboard_index=3)
+                    self.send_msg(peer, start=True)
                     if self.rooms.array[self.users[peer][1]].get_number_players() == 3:
                         for t in self.users:
                             if t[1] == self.users[peer][1]:
-                                t[0] = 5
+                                t[0] = 6
+                                self.send_msg(peer, start=True)
+
+                elif self.users[peer] == 6:
+                    self.rooms.array[self.users[peer][1]].next_step()
 
     def create_room(self, peer):
         print('creating')
