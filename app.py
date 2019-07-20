@@ -73,17 +73,17 @@ class Server:
                 print(self.rooms)
                 peer = event.object.peer_id
                 print(self.users[peer])
-                if self.users[peer] not in {2, 3, 4}:
+                if self.users[peer] not in {2, 3, 4, 5}:
                     if event.object.text == 'Аукцион' and self.users[peer] == 0:
                         self.users[peer] = 1
                     elif event.object.text == 'Открытый пошаговый аукцион' and self.users[peer] == 1:
-                        self.users[peer] = 2
+                        self.users[peer] = 5
                         # self.send_msg(peer, start=True)
                         continue
                     elif event.object.text == 'Назад' and self.users[peer] == 1:
                         self.users[peer] = 0
                     self.send_msg(peer, keyboard_index=self.users[peer])
-                elif self.users[peer] == 2:
+                elif self.users[peer] == 5:
                     print('&&')
                     self.create_room(peer)
 
