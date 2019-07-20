@@ -52,14 +52,14 @@ class Server:
         """Отправка стартового сообщения при запуске теста"""
 
         self.vk_api.messages.send(peer_id=send_id,
-                                  message = 'рад Вас видеть'
+                                  message='рад Вас видеть',
                                   random_id=self.random_id,
                                   keyboard=open(self.keyboards[5][0], "r", encoding="UTF-8").read())
 
     def standard_message(self, send_id, keyboard_index, message):
 
         """Отправка стандартых сообщений (меню и прочее)"""
-
+        print('@')
         self.vk_api.messages.send(peer_id=send_id,
                                   message=self.keyboards[keyboard_index][1] if not message else message,
                                   random_id=self.random_id)
