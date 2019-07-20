@@ -11,9 +11,8 @@ import auction as au
 class Server:
     keyboards = {0: ['keyboards/home.json', 'Вы находитесь в главном меню!'],
                  1: ['keyboards/task.json', 'Выберите задание:'],
-                 2: ['keyboards/start.json', 'Нажмите, чтобы начать'],
-                 3: ['keyboards/none.json', ''],
                  5: ['keyboards/keyboard_start.json', 'Нажмите, чтобы начать'],
+                 3: ['keyboards/none.json', ''],
                  }
     users = au.HelpfulDict()
     rooms = au.HelpfulDict()
@@ -91,7 +90,8 @@ class Server:
         print('creating')
         for x in self.rooms.array.keys():
             if self.rooms.array[x].get_number_players() < 3:
-                self.rooms.array[x].array[x.array.get_len()] = au.User(self.get_user_name(peer), peer)
+                self.rooms.array[x].user_array[self.rooms.array[x].array.get_len()] = au.User(self.get_user_name(peer),
+                                                                                              peer)
                 for t in self.rooms.array[x].values():
                     print('---')
                     self.standard_message(t.id,
