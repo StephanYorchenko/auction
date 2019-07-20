@@ -1,5 +1,5 @@
 class Room:
-    def __init__(self, array_users, id,  auc_step=100, min_cost=500):
+    def __init__(self, array_users, id, auc_step=100, min_cost=500):
         """
         Initialisation of room
         :param array_users: PlayerChain()
@@ -85,6 +85,7 @@ class PlayerChain:
 
     def add(self, name, id):
         self.array.append(User(name, id))
+
 
 class HelpfulDict:
 

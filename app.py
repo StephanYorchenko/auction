@@ -89,6 +89,7 @@ class Server:
     def create_room(self, peer):
         print('creating')
         for x in self.rooms.array.keys():
+            print('   @@@')
             if self.rooms.array[x].get_number_players() < 3:
                 self.rooms.array[x].user_array[self.rooms.array[x].array.get_len()] = au.User(self.get_user_name(peer),
                                                                                               peer)
@@ -100,6 +101,7 @@ class Server:
 
         self.rooms[len(self.rooms.array.keys())] = au.Room(au.PlayerChain([au.User(self.get_user_name(peer), peer)]),
                                                            id=len(self.rooms.array.keys()))
+        print(len(self.rooms.array))
 
     def get_user_name(self, user_id):
 
