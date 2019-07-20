@@ -80,7 +80,8 @@ class Server:
                         self.users[peer] = 3
                         self.send_msg(peer, start=True)
                         continue
-                    elif event.object.text == 'Назад' and self.
+                    elif event.object.text == 'Назад' and self.users[peer] == 1:
+                        self.users[peer] = 0
                 elif self.users[peer] == 3:
                     self.create_room(peer)
 
