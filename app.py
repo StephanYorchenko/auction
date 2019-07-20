@@ -12,6 +12,7 @@ class Server:
     keyboards = {0: ['keyboards/home.json', 'Вы находитесь в главном меню!'],
                  1: ['keyboards/task.json', 'Выберите задание:'],
                  2: ['keyboards/start.json', 'Нажмите, чтобы начать'],
+                 3: ['keyboards/none.json', '']
                  }
     users = au.HelpfulDict()
     rooms = au.HelpfulDict()
@@ -56,12 +57,13 @@ class Server:
                                   random_id=self.random_id,
                                   keyboard=open(self.keyboards[5][0], "r", encoding="UTF-8").read())
 
-    def standard_message(self, send_id, keyboard_index, message):
+    def standard_message(self, send_id, keyboard_index=3, message=0):
 
         """Отправка стандартых сообщений (меню и прочее)"""
         print('@')
         self.vk_api.messages.send(peer_id=send_id,
                                   message=self.keyboards[keyboard_index][1] if not message else message,
+                                  keyboard=open(self.keyboards[keyboard_index][0], "r", encoding="UTF-8").read(),
                                   random_id=self.random_id)
 
     def start(self):
@@ -78,6 +80,7 @@ class Server:
                         self.users[peer] = 3
                         self.send_msg(peer, start=True)
                         continue
+                    elif event.object.text == 'Назад' and self.
                 elif self.users[peer] == 3:
                     self.create_room(peer)
 
