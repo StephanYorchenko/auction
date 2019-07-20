@@ -11,7 +11,7 @@ class Room:
         self.current_cost = min_cost
 
     def get_number_players(self):
-        return len(self.users_array)
+        return self.users_array.get_len()
 
     def next_step(self):
         boolean, cost = self.users_array[0].step(self.current_cost, self.auc_step)
