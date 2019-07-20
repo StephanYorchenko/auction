@@ -55,7 +55,7 @@ class Server:
         self.vk_api.messages.send(peer_id=send_id,
                                   message='Нажмите начать',
                                   random_id=self.random_id,
-                                  keyboard=open(f'keyboards/keyboard', "r", encoding="UTF-8").read())
+                                  keyboard=open(f'keyboards/keyboard_start', "r", encoding="UTF-8").read())
 
     def standard_message(self, send_id, keyboard_index=3, message=0):
 
