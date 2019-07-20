@@ -90,15 +90,15 @@ class Server:
     def create_room(self, peer):
         print('creating')
         for x in self.rooms.array.keys():
-            if x.get_number_players() < 3:
-                x.array[x.array.get_len()] = au.User(self.get_user_name(peer), peer)
-                for t in x.values():
+            if self.rooms.array[x].get_number_players() < 3:
+                self.rooms.array[x].array[x.array.get_len()] = au.User(self.get_user_name(peer), peer)
+                for t in self.rooms.array[x].values():
                     print('---')
                     self.standard_message(t.id,
                                           message=f'{self.get_user_name(peer)} присоединился к игре')
                 return 0
 
-        self.rooms[self.rooms.array.get_len()] = au.Room(au.PlayerChain(au.User(self.get_user_name(peer), peer)),
+        self.rooms[len(self.rooms.array.keys())] = au.Room(au.PlayerChain(au.User(self.get_user_name(peer), peer)),
                                                          id=self.rooms.array.get_len())
 
     def get_user_name(self, user_id):
