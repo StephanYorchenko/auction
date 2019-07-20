@@ -93,7 +93,7 @@ class Server:
             if self.rooms.array[x].get_number_players() < 3:
                 print(self.rooms)
                 self.rooms.array[x].users_array.add(self.get_user_name(peer), peer)
-                for t in self.rooms.array[x].values():
+                for t in self.rooms.array[x].users_array:
                     print('---')
                     self.standard_message(t.id,
                                           message=f'{self.get_user_name(peer)} присоединился к игре')
