@@ -28,7 +28,7 @@ class Server:
 
         """Распределение типов сообщений по методам"""
 
-        if self.users[send_id] in {4, 5}:
+        if self.users[send_id] in {3, 4}:
             self.game_messages(send_id, message, start)
         else:
             self.standard_message(send_id, keyboard_index, message)
@@ -52,7 +52,7 @@ class Server:
         """Отправка стартового сообщения при запуске теста"""
 
         self.vk_api.messages.send(peer_id=send_id,
-                                  message=self.keyboards[5][1],
+                                  message = 'рад Вас видеть'
                                   random_id=self.random_id,
                                   keyboard=open(self.keyboards[5][0], "r", encoding="UTF-8").read())
 
@@ -62,8 +62,7 @@ class Server:
 
         self.vk_api.messages.send(peer_id=send_id,
                                   message=self.keyboards[keyboard_index][1] if not message else message,
-                                  random_id=self.random_id,
-                                  keyboard=open(self.keyboards[keyboard_index][0], "r", encoding="UTF-8").read())
+                                  random_id=self.random_id)
 
     def start(self):
         print('@home')
@@ -71,10 +70,36 @@ class Server:
             if event.type == VkBotEventType.MESSAGE_NEW:
                 print(self.users, event.type, event.object.text, sep='     ')
                 peer = event.object.peer_id
-                if event.object.text == 'Аукцион' and self.users[peer] == 0:
-                    self.users[peer] = 1
+                if self.users[peer] not in {3, 4}:
+                    if event.object.text == 'Аукцион' and self.users[peer] == 0:
+                        self.users[peer] = 1
+                    elif event.object.text == 'Открыть пошаговый аукцион' and self.users[peer] == 1:
+                        self.users[peer] = 3
+                        self.send_msg(peer, start=True)
+                        continue
+                elif self.users[peer] == 3:
+                    self.create_room(peer)
+
+
 
                 self.send_msg(peer, keyboard_index=self.users[peer])
+
+    def create_room(self, peer):
+        for x in self.rooms.array.keys():
+            if x.get_number_players()<3:
+                x.array[x.array.get_len()]=au.User(self.get_user_name(peer),peer)
+                return [self.standard_message(t.id,
+                                      message=f'{self.get_user_name(peer)} присоединился к игре') for t in x.array.values()]
+
+
+        self.rooms[self.rooms.array.get_len()] = au.Room(au.PlayerChain(au.User(self.get_user_name(peer),peer)),
+                                                         id = self.rooms.array.get_len())
+
+    def get_user_name(self, user_id):
+
+        """ Получаем имя пользователя"""
+
+        return self.vk_api.users.get(user_id=user_id)[0]['first_name']
 
 
 if __name__ == '__main__':
